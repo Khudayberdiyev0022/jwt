@@ -15,5 +15,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+  return $request->user();
 });
+
+Route::middleware('api')->prefix('auth')->group(function () {
+  Route::post('login', [\App\Http\Controllers\AuthController::class, 'login']);
+  Route::post('logout', [\App\Http\Controllers\AuthController::class, 'logout']);
+  Route::post('refresh', [\App\Http\Controllers\AuthController::class, 'refresh']);
+  Route::post('me', [\App\Http\Controllers\AuthController::class, 'me']);
+});
+
+Route::apiResource('fruits', \App\Http\Controllers\Api\V1\FruitController::class);
+//Route::post('login',)
