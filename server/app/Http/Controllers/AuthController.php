@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
@@ -13,7 +15,7 @@ class AuthController extends Controller
    */
   public function __construct()
   {
-    $this->middleware('auth:api', ['except' => ['login']]);
+    $this->middleware('auth:api', ['except' => ['login', 'register']]);
   }
 
   /**
@@ -25,11 +27,28 @@ class AuthController extends Controller
   {
     $credentials = request(['email', 'password']);
 
-    if (! $token = auth()->attempt($credentials)) {
+    if (!$token = auth()->attempt($credentials)) {
       return response()->json(['error' => 'Unauthorized'], 401);
     }
 
     return $this->respondWithToken($token);
+  }
+
+  public function register(Request $request)
+  {
+    $data = $request->validate([
+      'name'     => 'required|string|between:2,100',
+      'email'    => 'required|string|email|max:100|unique:users',
+      'password' => 'required|string|confirmed|min:6',
+    ]);
+    $data['password'] = bcrypt($request->password);
+
+    $user = User::create($data);
+
+    return response()->json([
+      'message' => 'User successfully registered',
+      'user'    => $user,
+    ], 201);
   }
 
   /**
@@ -67,7 +86,7 @@ class AuthController extends Controller
   /**
    * Get the token array structure.
    *
-   * @param  string $token
+   * @param string $token
    *
    * @return \Illuminate\Http\JsonResponse
    */
@@ -75,8 +94,8 @@ class AuthController extends Controller
   {
     return response()->json([
       'access_token' => $token,
-      'token_type' => 'bearer',
-      'expires_in' => auth()->factory()->getTTL() * 60
+      'token_type'   => 'bearer',
+      'expires_in'   => auth()->factory()->getTTL() * 60,
     ]);
   }
 }
