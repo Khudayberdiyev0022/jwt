@@ -119,6 +119,11 @@
       <excludeFolder url="file://$MODULE_DIR$/server/vendor/symfony/polyfill-intl-normalizer" />
       <excludeFolder url="file://$MODULE_DIR$/server/vendor/psr/http-client" />
       <excludeFolder url="file://$MODULE_DIR$/server/vendor/symfony/polyfill-ctype" />
+      <excludeFolder url="file://$MODULE_DIR$/server/vendor/lcobucci/jwt" />
+      <excludeFolder url="file://$MODULE_DIR$/server/vendor/lcobucci/clock" />
+      <excludeFolder url="file://$MODULE_DIR$/server/vendor/stella-maris/clock" />
+      <excludeFolder url="file://$MODULE_DIR$/server/vendor/psr/clock" />
+      <excludeFolder url="file://$MODULE_DIR$/server/vendor/tymon/jwt-auth" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
