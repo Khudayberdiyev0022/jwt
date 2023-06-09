@@ -1,15 +1,17 @@
 <template>
-  <div class="about">
+  <div class="container">
     <h1>Login</h1>
-    <div class="form">
-      <div class="form-group">
-        <input type="text" v-model="email" class="form-control" placeholder="Email">
-      </div>
-      <div class="form-group">
-        <input type="text" v-model="password" class="form-control" placeholder="Password">
-      </div>
-      <div class="form-group">
-        <input type="submit" @click.prevent="store()" value="Send">
+    <div class="row">
+      <div class="col-6 m-auto">
+        <div class="form-group mb-3">
+          <input type="text" v-model="email" class="form-control" placeholder="Email">
+        </div>
+        <div class="form-group mb-3">
+          <input type="text" v-model="password" class="form-control" placeholder="Password">
+        </div>
+        <div class="form-group">
+          <input type="submit" @click.prevent="store()" value="Send" class="btn btn-primary">
+        </div>
       </div>
     </div>
   </div>
