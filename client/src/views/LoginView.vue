@@ -31,7 +31,9 @@ export default {
     store() {
       this.$http.post('api/auth/login', {email: this.email, password: this.password})
           .then((res) => {
-            console.log(res);
+            console.log(res.data);
+            this.email = '';
+            this.password = '';
           }).catch((err) => {
         console.log(err);
       })

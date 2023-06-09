@@ -39,7 +39,10 @@ export default {
     store() {
       this.$http.post('api/auth/register', {name: this.name, email: this.email, password: this.password, password_confirmation: this.password_confirmation,})
           .then((res) => {
-            console.log(res);
+            this.name = '';
+            this.email = '';
+            this.password = '';
+            this.password_confirmation = '';
           }).catch((err) => {
         console.log(err);
       })
